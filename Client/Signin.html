@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Global Styles -->
+    <link rel="stylesheet" href="./Pages/global.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./Pages/Auth/SignIn/Signin.css">
+    <title>Chat | Sign-in</title>
+</head>
+<body>
+    <div class='sign-in'>
+        
+        <form  id='sign-in' >
+               
+               <h1 style="display: flex;color: var(--blue-dark); place-content: center; place-items: center;"> <i class="fa fa-2x fa-user"></i></h1>
+              <h2 style="display: flex; place-content: center; place-items: center;" >Sign in</h2>
+              
+              <div class='alert-msg'></div>
+            <label>Cell Number</label>
+            <input name='tel' type="text" class="tel" placeholder='0734543234'    />
+             
+            <label>Username</label>
+            <input name="username"  type="text" class="username" placeholder='stanisani...'  />
+            
+            <div class="form-additions">
+
+            <section style="display: flex; place-content: center; place-items: center; gap: 1rem; " >
+            <input style="margin-top: .1rem;" type="radio"/>
+            <a href="alright">Remember me?</a>
+            </section>
+
+            <section>
+                <a href='./signup.html'>Create new account</a>
+            </section>
+            </div>  
+            
+            <button href="./index.html" class="btn-submit">Sign in</button>
+          
+        </form>
+     
+      
+        
+        <script src="./Utility/Utility.js"></script>
+        <script src="./Api/Api.js"></script>
+        
+
+        <script>
+
+const form = document.querySelector('form#sign-in')
+const cell = form.querySelector('input.tel')
+const name = form.querySelector('input.username')
+
+form.addEventListener('submit', e=>{
+  e.preventDefault();
+  const form = document.querySelector('form#sign-in');
+  const cellNumber =  form.querySelector('input.tel');
+  const UserName = form.querySelector('input.username');
+  
+  //check if values are present
+  if(cellNumber.value && UserName.value )
+  {   
+    
+   
+    getUsers()
+    .then(users=>{
+    const potentialUser = users.find(use=> use.cell === cellNumber.value  && use.name===UserName.value )
+     
+  
+   if(!potentialUser)
+   {  
+     outputMessage(`Please check that cell number and username are correct`, 'var(--red)', 3000) 
+   }
+   else
+   {  
+     outputMessage("Successfully signed in", 'var(--green)', 2000); 
+     sessionStorage.setItem('user-id', potentialUser.id)
+     window.location.pathname = `index.html`
+
+   }
+
+    //clearfields
+    UserName.value = ''
+    cellNumber.value = ''
+
+  })
+   
+  } 
+  
+  
+  else 
+  {  
+   outputMessage("Please enter all fields!!!", 'var(--red)', 2000)
+  }
+     
+} )
+
+</script>
+</body>
+</html>

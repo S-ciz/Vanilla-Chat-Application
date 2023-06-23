@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Pages/global.css">
+    <link rel="stylesheet" href="./Home/home.css">
+    <!--font awesome css-->
+    <link rel="stylesheet" href="./assets/all.min.css">
+    <!--font awesome js-->
+    <script src="./assets/all.min.js"></script>
+    <title>Chat</title>
+</head>
+<body>
+    
+     <div>
+        <div style="display: none;" id="secret">
+            <span id="sender"></span>
+            <span id="receiver"></span>
+            <span id="user-id"></span>
+            <span id="chat-id"></span>
+        </div>
+ 
+       
+        </div>
+    <!--Navbar-->
+    <my-bar  title="Whatsapp">
+        <div  slot="log">
+           <a style="padding-left: 1rem; color:white;" href="./Signin.html"> <i class="fa fa-sign-out "></i>  Sign out</a>  
+        </div>
+    </my-bar>
+    <!--End of navbar-->
+     </div>
+     
+   <div class="main">
+
+    <div class="comp-1">
+        <div id="user"> <!--Current user goes here--> </div>
+        <div id="chats"><!--All chats go here--> </div>  
+        <!--End of comp 1-->     
+   </div>
+
+   <div class="comp-2">
+    <div class="user-part"> <!--current chat goes here--> </div>
+    <div class="messages">  <!--messages--></div>
+   
+   <form class="input">
+    <div class="toggle-emoji" style="cursor: pointer;">&#128512;</div> 
+   <i style="color:var(--grey)" class="fa-solid fa-paperclip fa-lg"></i>
+    <input id="frm-input" active="true" type="text"  placeholder="Enter message..."/>
+    
+     <button class="btn-submit" type="submit"> <i class="fa fa-paper-plane "></i></button>
+  </form>
+  <!--end of comp 2-->
+
+  <div  class="comp-4">
+
+  </div>
+</div> 
+
+
+<!--end of main-->
+</div>
+
+<!--Import components -->
+
+<script src = "./Api/Api.js"></script>
+<script src="./Components/Navbar.js"></script>
+<script src="./Components/Chat.js"></script>
+<script src="./Components/User.js"></script>
+<script src="./Components/Notification.js"></script>
+<script src="./Components/Card.js"></script>
+<script src="./Components/Avatars.js"></script>
+<script src="./Components/Profile.js"></script>
+<script src="./Components/Avatars.js"></script>
+
+
+
+<script>
+//when the page load, load data...
+window.addEventListener('load', e=>{
+    const user_field = document.querySelector('div#user')
+   
+    //Display current user when page loads
+    getUser(sessionStorage.getItem('user-id'))
+    .then(user=>{
+         
+    let sender = document.querySelector('span#sender')
+      
+     sender.textContent = user.name
+
+        user_field.innerHTML = 
+     `
+     <my-user imgsrc = ${user.img}> 
+        <div slot="title"> 
+            ${user.name + ' ' + user.surname}
+        </div>
+
+        <div slot="status"> 
+           @Whatsapp
+        </div> 
+       
+            <div style="display: flex; gap: 1rem;" slot="icon"> 
+                
+                <i onClick="addUser()" class="fa  fa-add"></i>
+                <my-badge> 
+                  <div slot="number"> 
+                      5
+                  </div>
+                </my-badge>
+            </div>  
+        </my-user>
+     `
+    }) 
+
+
+    //load chat users
+    fetchChats(sessionStorage.getItem('user-id'))
+    .then(data=>{
+        const chats = document.querySelector('div#chats');
+        data.forEach(chat => {
+        chats.innerHTML += 
+        `<div> 
+            <my-chat 
+            id=${chat.id} 
+            img=${chat.img}
+            name='${chat.name}'
+             />
+         </div>`
+              
+        });
+    })
+
+})   
+
+
+
+//add a new chat
+var click_state = true;
+
+const removeAdd = ()=>{
+    document.querySelector('.comp-3').remove()
+    click_state= true;
+}
+const addUser = ()=>{
+    
+    if(click_state)
+    {   
+        
+        const div = document.createElement('div');
+        div.className = 'comp-3'
+
+    div.innerHTML =  
+    `   
+    <div class="i"> 
+        <i> </i>
+        <i onclick="removeAdd()" style="padding-top:1.4rem; padding-bottom: 0 ; padding-right: 1.5rem; color: #fff;" class="fa fa-times fa-2x"></i>
+    </div>
+   
+    <div style="display: grid; place-items:center;" class="image">  
+      <img style="width:200px; margin-top:-1rem;" src="./chat.png" alt="">
+    </div> 
+     
+    
+    <form class="search">
+        <p>Enter user phone number, and then refresh the page to add user </p>
+        <input  active="true" type="text"  placeholder="Enter phone number..."/>
+         <button style="display: grid;" class="btn-submit"> <span> <i class="fa fa-add"></i> Add user </span> </button>
+      </form> 
+
+
+      `
+
+      
+    document.querySelector('div.main').appendChild(div)
+    click_state = false
+    
+    //form submition
+    const searchForm = document.querySelector('form.search')
+    searchForm.addEventListener('submit', e=>{
+    e.preventDefault()
+
+    const input = searchForm.querySelector('input')
+
+    if(input.value)
+    {    
+        addChat(input.value, sessionStorage.getItem('user-id')) 
+        //clear fields
+        input.value = '' 
+    }
+
+})
+     
+
+    }
+    
+}
+
+</script>
+
+
+<!--Socket io client-->
+<!-- <script src="https://unpkg.com/picmo@latest/dist/umd/index.js"></script>-->
+<script type="text/html" src="../Server/node_modules/picmo/dist/umd/index.js"></script>
+<script src="socket.io/socket.io.js"></script>
+<script src="./Emojis/Emoji.js"></script>
+<script type="module" src="./chat.js"></script>
+
+
+</body>
+</html>

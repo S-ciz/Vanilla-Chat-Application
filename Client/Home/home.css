@@ -1,0 +1,146 @@
+
+.comp-2
+{
+    position: relative;
+    height: 80vh;
+    
+}
+
+
+.messages
+{   
+    overflow-y: scroll;
+    height: 60vh;
+}
+
+.messages::-webkit-scrollbar
+{
+    display: none;
+}
+
+.input
+{    
+    position: absolute;
+    display: flex;
+    place-items: center;
+    padding: 0 1rem;
+    gap: 1rem;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    
+    
+}
+
+
+.input input, .search input
+{
+    width: 100%;
+    border: none;
+ 
+    border: 1px solid var(--grey);
+}
+
+.search{
+    padding: 1rem;
+
+    margin-top: -3rem;
+}
+
+.input input[type=text], .search input[type=text]
+{
+    height: 3rem;
+    padding: 1rem;
+}
+
+.search button
+{
+  display: grid;
+  width: 100%;
+  border: 1px solid var(--white);
+
+  
+  margin-top: 1rem;
+}
+
+
+
+
+/*  text css */
+
+.text
+{    
+  
+    background-color: var(--green);
+    color: white;
+    padding: 1rem;
+    width: 300px;
+    border-radius: 1rem;
+    margin:  1rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+
+
+.text .time 
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.main
+{
+  display: flex;
+ 
+}
+.comp-3 .i 
+{
+    display: flex;
+    justify-content: space-between;
+}
+  
+.main .comp-3
+{
+ transition: all .5s ease-in;
+ width: 300px;
+ background: var(--blue-dark);
+ color: var(--white);
+ border: none;
+}
+.comp-3 .image 
+{
+   padding-top: 2rem;
+}
+.comp-3:hover
+{
+    width: 500px;
+}
+
+
+.comp-3 p 
+{
+  padding: 1rem 0.5rem;
+  font-size: 13px;
+  display: grid;
+  place-items: center;
+}
+
+.main .comp-1 
+{
+  width: 600px;
+  height: 90vh;
+  overflow: scroll;
+}
+
+.main .comp-2
+{
+  width: 100%;
+}
+
+  .main .comp-1::-webkit-scrollbar 
+  {
+    width: 2px;
+  }
+
+  
+ 
