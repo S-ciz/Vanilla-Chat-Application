@@ -5,7 +5,7 @@
 # Sign up
 ![image](https://github.com/S-ciz/Vanilla-Chat-Application/assets/95995178/12f1ee8b-49d8-4077-828f-1f725b00852c)
 
-# Interface 
+# Live Chat
 ![image](https://github.com/S-ciz/Vanilla-Chat-Application/assets/95995178/edd6fe6c-5359-4bba-8f4b-db107e91e9a2)
 
 # Adding A chat
