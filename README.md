@@ -1,4 +1,10 @@
 # Vanilla-Chat-Application with vanilla javascript, html css socket io (incomplete)
+
+# Getting Started
+cd server
+npm install
+npm run start
+
 # Sign in
 ![image](https://github.com/S-ciz/Vanilla-Chat-Application/assets/95995178/9f7032a6-a9ee-4481-807d-280085082105) 
 
