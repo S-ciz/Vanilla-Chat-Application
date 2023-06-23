@@ -3,7 +3,7 @@
 ![image](https://github.com/S-ciz/Vanilla-Chat-Application/assets/95995178/9f7032a6-a9ee-4481-807d-280085082105) 
 
 # Sign up
-![image](https://github.com/S-ciz/Vanilla-Chat-Application/assets/95995178/a13140bb-653c-41cd-b5eb-d96fc6ebc0a4) 
+![image](https://github.com/S-ciz/Vanilla-Chat-Application/assets/95995178/12f1ee8b-49d8-4077-828f-1f725b00852c)
 
 # Interface 
 ![image](https://github.com/S-ciz/Vanilla-Chat-Application/assets/95995178/edd6fe6c-5359-4bba-8f4b-db107e91e9a2)
